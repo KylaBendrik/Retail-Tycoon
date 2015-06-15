@@ -11,5 +11,3 @@ class Article
     "#{@color} #{@type}"
   end
 end
-
-puts Article.new(:blouse, :cotton, :blue)
