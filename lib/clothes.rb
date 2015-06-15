@@ -1,5 +1,5 @@
 class Article
-  attr_reader :type, :fabric_type, :color, :price
+  attr_reader :type, :fabric_type, :color
   
   def initialize(new_type, new_fabric_type, new_color)
     @type = new_type
@@ -12,7 +12,15 @@ class Article
     "$#{@base_price}"
   end
   
+  def price=(new_price)
+    @base_price = new_price
+  end
+  
   def to_s
+    "#{@color} #{@type}"
+  end
+  
+  def sales_tag
     "#{@color} #{@type} for #{price}"
   end
 end
