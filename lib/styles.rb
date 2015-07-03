@@ -1,11 +1,21 @@
 class Style
-  attr_reader :type, :fabric_type, :color
+  attr_reader :type, :fabric_type, :color, :style_number
 
-  def initialize(new_type, new_fabric_type, new_color, new_price)
-    @type = new_type
-    @fabric_type = new_fabric_type
-    @color = new_color
-    @base_price = new_price
+  @@types = [:shirt, :blouse, :skirt, :shorts, :pants, :dress, :jumpsuit, :sweater]
+  @@fabric_types = [:cotton, :silk, :spandex, :rayon, :polyester, :velvet]
+  @@colors = [:red, :blue, :green, :white, :floral, :black, :zaney]
+  @@prices = [1, 2, 3, 4, 15]
+
+  def initialize()
+    g = Random.new
+    
+    @type = g.rand @@types.length
+    @fabric_type = g.rand @@fabric_types.length
+    @color = g.rand @@colors.length
+    
+    @style_number = "#{@type}#{@fabric_type}#{@color}"
+    
+    @base_price = @@prices.sample
   end
 
   def price
@@ -17,10 +27,10 @@ class Style
   end
 
   def to_s
-    "#{@color} #{@type}"
+    "#{@@colors[@color]} #{@@types[@type]}"
   end
 
   def sales_tag
-    "#{@color} #{@type} for #{price}"
+    "#{style_number}: #{@@colors[@color]} #{@@types[@type]} for #{price}"
   end
 end
