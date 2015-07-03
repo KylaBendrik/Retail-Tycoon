@@ -1,11 +1,16 @@
 class Style
   attr_reader :type, :fabric_type, :color
 
-  def initialize(new_type, new_fabric_type, new_color, new_price)
-    @type = new_type
-    @fabric_type = new_fabric_type
-    @color = new_color
-    @base_price = new_price
+  @@types = [:shirt, :blouse, :skirt, :shorts, :pants, :dress, :jumpsuit, :sweater]
+  @@fabric_types = [:cotton, :silk, :spandex, :rayon, :polyester, :velvet]
+  @@colors = [:red, :blue, :green, :white, :floral, :black, :zaney]
+  @@prices = [1, 2, 3, 4, 15]
+
+  def initialize()
+    @type = @@types.sample
+    @fabric_type = @@fabric_types.sample
+    @color = @@colors.sample
+    @base_price = @@prices.sample
   end
 
   def price
