@@ -1,4 +1,4 @@
-class Article
+class Style
   attr_reader :type, :fabric_type, :color
 
   def initialize(new_type, new_fabric_type, new_color, new_price)

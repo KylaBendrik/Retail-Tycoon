@@ -1,4 +1,4 @@
-require_relative 'clothes'
+require_relative 'styles'
 
 $inventory = []
 
@@ -8,5 +8,5 @@ fabric_types = [:cotton, :silk, :spandex, :rayon, :polyester, :velvet]
 prices = [1, 2, 3, 4, 15]
 
 4.times do |n|
-  $inventory << Article.new(types.sample, fabric_types.sample, colors.sample, prices.sample)
+  $inventory << Style.new(types.sample, fabric_types.sample, colors.sample, prices.sample)
 end
