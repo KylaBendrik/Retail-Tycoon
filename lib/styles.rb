@@ -8,13 +8,13 @@ class Style
 
   def initialize()
     g = Random.new
-    
+
     @type = g.rand @@types.length
     @fabric_type = g.rand @@fabric_types.length
     @color = g.rand @@colors.length
-    
+
     @style_number = "#{@type}#{@fabric_type}#{@color}"
-    
+
     @base_price = @@prices.sample
   end
 
@@ -32,5 +32,14 @@ class Style
 
   def sales_tag
     "#{style_number}: #{@@colors[@color]} #{@@types[@type]} for #{price}"
+  end
+
+  def inspect
+    "\nStyle Number: #{style_number}\n" +
+    "Style: #{@@types[@type]}\n" +
+    "Color: #{@@colors[@color]}\n" +
+    "Fabric: #{@@fabric_types[@fabric_type]}\n"+
+    "\n" +
+    "Price: #{price}"
   end
 end

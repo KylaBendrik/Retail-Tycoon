@@ -7,14 +7,15 @@ print_inv
 
 loop do
   puts ""
-  puts "What do you want to do? (For list of commands, type 'help')"
+  puts "What do you want to do? (For list of commands, type '(h)elp')"
   command = gets.chomp
   puts ""
 
   if command[0] == 'h'
-    puts "'help' lists avaliable commands"
-    puts "'inventory' lists everything in your store inventory"
-    puts "'update' lets you update inventory prices"
+    puts "'(h)elp' lists avaliable commands"
+    puts "'(i)nventory' lists everything in your store inventory"
+    puts "'(u)pdate' lets you update inventory prices"
+    puts "'(d)etails' allows you to see more details about a specific style"
   elsif command[0] == 'i'
     print_inv
   elsif command[0] == 'u'
@@ -56,5 +57,19 @@ loop do
         continue = true
       end
     end while continue
+  elsif command[0] == 'd'
+    puts "Enter the style number of the item you wish to inspect"
+    style_num = gets.chomp
+    style_id = 0
+
+    $inventory.each_with_index do |batch, index|
+      if batch.style.style_number == style_num
+        style_id = index
+        break
+      end
+    end
+
+    puts "#{$inventory[style_id].style.inspect}"
+
   end
 end
