@@ -70,6 +70,5 @@ loop do
     end
 
     puts "#{$inventory[style_id].style.inspect}"
-
-  end
-end
+  end #end of command options
+end #end of command-asking loop
