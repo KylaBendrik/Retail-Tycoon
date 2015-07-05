@@ -18,7 +18,7 @@ class Style
     @fabric_type = g.rand @@fabric_types.length
     @color = g.rand @@colors.length
 
-    @style_number = "#{@type}#{@fabric_type}#{@color}"
+    @style_number = "#{@type}#{@fabric_type.to_s.rjust(2,"0")}#{@color.to_s.rjust(2,"0")}"
     @cost = 5
     @base_price = @@prices.sample
   end
