@@ -1,5 +1,5 @@
 class Style
-  attr_reader :type, :fabric_type, :color, :style_number
+  attr_reader :type, :fabric_type, :color, :style_number, :cost
 
   @@types = [:shirt, :blouse, :skirt, :shorts, :pants, :dress, :jumpsuit, :sweater]
   @@fabric_types = [:cotton, :silk, :spandex, :rayon, :polyester, :velvet]
@@ -14,12 +14,16 @@ class Style
     @color = g.rand @@colors.length
 
     @style_number = "#{@type}#{@fabric_type}#{@color}"
-
+    @cost = 5
     @base_price = @@prices.sample
   end
 
   def price
     "$#{@base_price}"
+  end
+
+  def cost
+    "$#{@cost}"
   end
 
   def price=(new_price)
@@ -40,6 +44,6 @@ class Style
     "Color: #{@@colors[@color]}\n" +
     "Fabric: #{@@fabric_types[@fabric_type]}\n"+
     "\n" +
-    "Price: #{price}"
+    "Price: #{price}   Cost to make: #{cost}"
   end
 end
