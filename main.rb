@@ -15,21 +15,35 @@ loop do
     print_inv
   elsif command[0] == 'u'
     $inventory.each_with_index do |batch, index|
-      puts "#{index}: #{batch.style.sales_tag}"
+      puts "#{batch.style.sales_tag}"
     end
 
     begin
       continue = false
-      puts "Type the index number of the item for which you wish to update the pricing."
-      style_id = gets.to_i
+      puts "Type the style number of the item for which you wish to update the pricing."
+      style_num = gets.chomp
+      style_id = 0
+
+
+        $inventory.each_with_index do |batch, index|
+          if batch.style.style_number == style_num
+            style_id = index
+            break
+          end
+        end
 
       puts "What price do you want the #{$inventory[style_id].style.to_s} to be?"
       $inventory[style_id].style.price = gets.chomp
 
       puts "The #{$inventory[style_id].style.to_s} is now priced at #{$inventory[style_id].style.price}."
-      puts "Would you like to update another price? (Yn)"
+      puts "Would you like to update another price? (Yn) (type 'list' to print inventory list)"
       command = gets
       if command.chomp.upcase == 'Y' or command == "\n"
+        continue = true
+      elsif command.chomp[0] == 'l'
+        $inventory.each_with_index do |batch, index|
+          puts "#{batch.style.sales_tag}"
+        end
         continue = true
       end
     end while continue
