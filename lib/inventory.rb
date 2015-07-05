@@ -4,7 +4,7 @@ class Inventory
   attr_reader :batches
   def initialize
     @batches = []
-    4.times { @batches << Batch.new(Style.new()) }
+    4.times { @batches << Batch.new(Style.create_random()) }
   end
 
   def list
@@ -22,6 +22,6 @@ class Inventory
   end
 
   def add_style
-
+    @batches << Batch.new(Style.new())
   end
 end

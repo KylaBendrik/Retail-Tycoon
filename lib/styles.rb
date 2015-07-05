@@ -11,16 +11,25 @@ class Style
      :zaney]
   @@prices = [1, 2, 3, 4, 15]
 
-  def initialize()
+  def initialize(type, fabric_type, color, base_price)
+    @type=type
+    @fabric_type=fabric_type
+    @color=color
+    @style_number = "#{type}#{fabric_type.to_s.rjust(2,"0")}#{color.to_s.rjust(2,"0")}"
+    @cost = 5
+    @base_price = base_price
+  end
+
+  def self.create_random()
     g = Random.new
 
-    @type = g.rand @@types.length
-    @fabric_type = g.rand @@fabric_types.length
-    @color = g.rand @@colors.length
+    type = g.rand @@types.length
+    fabric_type = g.rand @@fabric_types.length
+    color = g.rand @@colors.length
 
-    @style_number = "#{@type}#{@fabric_type.to_s.rjust(2,"0")}#{@color.to_s.rjust(2,"0")}"
-    @cost = 5
-    @base_price = @@prices.sample
+    base_price = @@prices.sample
+
+    new(type, fabric_type, color, base_price)
   end
 
   def price
