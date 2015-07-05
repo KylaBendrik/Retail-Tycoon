@@ -11,7 +11,7 @@ END
 
 $help_text = <<END
 '(h)elp' lists available commands
-'(i)nventory' lists everything in your store inventory
+'(l)ist' lists everything in your store inventory
 '(u)pdate' lets you update inventory prices
 '(i)nspect' allows you to see more details about a specific style
 END
