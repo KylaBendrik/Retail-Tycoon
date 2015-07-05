@@ -33,6 +33,7 @@ loop do
 
       puts ""
       puts "What price do you want the #{batch.style.to_s} to be?"
+      puts "Cost to produce: #{batch.style.cost}"
       batch.style.price = gets.chomp
 
       puts ""
@@ -45,7 +46,11 @@ loop do
       elsif command.chomp[0] == 'l'
         puts
         puts inventory.list
-        continue = true
+        puts "\nWould you like to update another price? (Yn)"
+        command = gets
+        if command.chomp.upcase == 'Y' or command == "\n"
+          continue = true
+        end
       end
     end while continue
   elsif command[0] == 'd'
@@ -53,7 +58,7 @@ loop do
     style_num = gets.chomp
 
     batch = inventory.lookup(style_num)
-    
+
     puts "#{batch.style.inspect}"
   end #end of command options
 end #end of command-asking loop
