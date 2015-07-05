@@ -38,7 +38,7 @@ class Style
     "#{style_number}: #{@@colors[@color]} #{@@types[@type]} for #{price}"
   end
 
-  def inspect
+  def inspect_style
     "\nStyle Number: #{style_number}\n" +
     "Style: #{@@types[@type]}\n" +
     "Color: #{@@colors[@color]}\n" +

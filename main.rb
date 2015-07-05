@@ -59,6 +59,6 @@ loop do
 
     batch = inventory.lookup(style_num)
 
-    puts "#{batch.style.inspect}"
+    puts "#{batch.style.inspect_style}"
   end #end of command options
 end #end of command-asking loop
