@@ -62,6 +62,15 @@ loop do
 
     puts "#{batch.style.inspect_style}"
   elsif command[0] == 'd'
-    puts "Design command unenabled. Please check back later."
+    puts "Design command unenabled. Type (f)abric, (t)ype, or (c)olors to see avaliable options."
+    command = gets.chomp
+    if command[0] == 'f'
+      puts Style.fabric_types
+    elsif command[0] == 't'
+      puts Style.types
+    elsif command[0] == 'c'
+      puts Style.colors
+    end
+
   end #end of command options
 end #end of command-asking loop

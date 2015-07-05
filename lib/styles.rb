@@ -60,4 +60,16 @@ class Style
     "\n" +
     "Price: #{price}   Cost to make: #{cost}"
   end
+
+  def self.types
+    @@types
+  end
+
+  def self.fabric_types
+    @@fabric_types
+  end
+
+  def self.colors
+    @@colors
+  end
 end
