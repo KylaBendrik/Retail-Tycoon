@@ -13,7 +13,7 @@ loop do
 
   if command[0] == 'h'
     puts $help_text
-  elsif command[0] == 'i'
+  elsif command[0] == 'l'
     inventory.print
   elsif command[0] == 'u'
     puts inventory.list
@@ -46,7 +46,7 @@ loop do
         end
       end
     end while continue
-  elsif command[0] == 'd'
+  elsif command[0] == 'i'
     puts $inspect_prompt
     style_num = gets.chomp
 
