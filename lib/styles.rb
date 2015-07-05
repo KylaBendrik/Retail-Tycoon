@@ -1,9 +1,14 @@
 class Style
   attr_reader :type, :fabric_type, :color, :style_number, :cost
 
-  @@types = [:shirt, :blouse, :skirt, :shorts, :pants, :dress, :jumpsuit, :sweater]
-  @@fabric_types = [:cotton, :silk, :spandex, :rayon, :polyester, :velvet]
-  @@colors = [:red, :blue, :green, :white, :floral, :black, :zaney]
+  @@types = [:shirt, :blouse, :skirt, :shorts, :pants, :dress, :jumpsuit, :sweater, :jacket]
+  @@fabric_types = [:cotton, :silk, :spandex, :rayon, :polyester, :velvet, :wool, :lace,
+    :brocade, :chiffon, :corduroy, :denim, :eyelet, :linen, :jersey, :leather, :organdy,
+    :suede, :taffeta]
+  @@colors = [:wine, :red, :orange, :peach, :pink, :puce, :rose, :ruby, :salmon,
+     :yellow, :green, :fern, :olive, :pistachio, :jade, :aqua, :mint, :blue, :indigo,
+     :violet, :wine, :white, :grey, :black, :brown, :khaki, :tan, :ecru, :cream, :shell,
+     :zaney]
   @@prices = [1, 2, 3, 4, 15]
 
   def initialize()
