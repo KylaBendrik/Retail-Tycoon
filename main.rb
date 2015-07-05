@@ -15,10 +15,10 @@ loop do
 
   if command[0] == 'h'
     puts "'(h)elp' lists avaliable commands"
-    puts "'(i)nventory' lists everything in your store inventory"
+    puts "'(l)ist' lists everything in your store inventory"
     puts "'(u)pdate' lets you update inventory prices"
-    puts "'(d)etails' allows you to see more details about a specific style"
-  elsif command[0] == 'i'
+    puts "'(i)nspect' allows you to see more details about a specific style"
+  elsif command[0] == 'l'
     inventory.print
   elsif command[0] == 'u'
     puts inventory.list
@@ -53,7 +53,7 @@ loop do
         end
       end
     end while continue
-  elsif command[0] == 'd'
+  elsif command[0] == 'i'
     puts "Enter the style number of the item you wish to inspect"
     style_num = gets.chomp
 
