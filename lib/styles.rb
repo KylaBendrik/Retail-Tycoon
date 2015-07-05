@@ -15,7 +15,7 @@ class Style
     @type=type
     @fabric_type=fabric_type
     @color=color
-    @style_number = "#{type}#{fabric_type.to_s.rjust(2,"0")}#{color.to_s.rjust(2,"0")}"
+    @style_number = "#{@@types.index(type)}#{@@fabric_types.index(fabric_type).to_s.rjust(2,"0")}#{@@colors.index(color).to_s.rjust(2,"0")}"
     @cost = 5
     @base_price = base_price
   end
@@ -23,9 +23,9 @@ class Style
   def self.create_random()
     g = Random.new
 
-    type = g.rand @@types.length
-    fabric_type = g.rand @@fabric_types.length
-    color = g.rand @@colors.length
+    type = @@types[g.rand @@types.length]
+    fabric_type = @@fabric_types[g.rand @@fabric_types.length]
+    color = @@colors[g.rand @@colors.length]
 
     base_price = @@prices.sample
 
@@ -45,18 +45,18 @@ class Style
   end
 
   def to_s
-    "#{@@colors[@color]} #{@@types[@type]}"
+    "#{@color} #{@type}"
   end
 
   def sales_tag
-    "#{style_number}: #{@@colors[@color]} #{@@types[@type]} for #{price}"
+    "#{style_number}: #{@color} #{@type} for #{price}"
   end
 
   def inspect_style
     "\nStyle Number: #{style_number}\n" +
-    "Style: #{@@types[@type]}\n" +
-    "Color: #{@@colors[@color]}\n" +
-    "Fabric: #{@@fabric_types[@fabric_type]}\n"+
+    "Style: #{@type}\n" +
+    "Color: #{@color}\n" +
+    "Fabric: #{@fabric_type}\n"+
     "\n" +
     "Price: #{price}   Cost to make: #{cost}"
   end

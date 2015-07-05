@@ -21,7 +21,7 @@ class Inventory
     @batches.find { |batch| batch.style.style_number == style_number }
   end
 
-  def add_style
-    @batches << Batch.new(Style.new())
+  def add_style(type, fabric_type, color, base_price)
+    @batches << Batch.new(Style.new(type.to_sym, fabric_type.to_sym, color.to_sym, base_price))
   end
 end

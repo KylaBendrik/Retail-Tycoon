@@ -62,15 +62,46 @@ loop do
 
     puts "#{batch.style.inspect_style}"
   elsif command[0] == 'd'
-    puts "Design command unenabled. Type (f)abric, (t)ype, or (c)olors to see avaliable options."
-    command = gets.chomp
-    if command[0] == 'f'
-      puts Style.fabric_types
-    elsif command[0] == 't'
-      puts Style.types
-    elsif command[0] == 'c'
-      puts Style.colors
-    end
-
+    puts "Type in what type of item you wish to design. Types are listed below"
+    puts Style.types
+    new_style_type = gets.chomp
+    puts "\nType in what kind of fabric the #{new_style_type} will be."
+    puts Style.fabric_types
+    new_style_fabric = gets.chomp
+    puts "\nType in what color the #{new_style_fabric} #{new_style_type} will be."
+    puts Style.colors
+    new_style_color = gets.chomp
+    puts "\nYou have designed a #{new_style_color} #{new_style_fabric} #{new_style_type}."
+    puts "Is this correct? (Yn)"
+    command = gets
+    if command.chomp == 'n'
+      begin
+        continue = true
+        puts "Indicate what part is wrong: (t)ype, (f)abric, or (c)olor"
+        command = gets.chomp
+        if command == 't'
+          puts "Type in what type of item you wish to design. Types are listed below"
+          puts Style.types
+          new_style_type = gets.chomp
+        elsif command == 'f'
+          puts "\nType in what kind of fabric the #{new_style_type} will be."
+          puts Style.fabric_types
+          new_style_fabric = gets.chomp
+        elsif command == 'c'
+          puts "\nType in what color the #{new_style_fabric} #{new_style_type} will be."
+          puts Style.colors
+          new_style_color = gets.chomp
+        end
+        puts "\nYou have designed a #{new_style_color} #{new_style_fabric} #{new_style_type}."
+        puts "Is this correct? (Yn)"
+        command = gets
+        if command.chomp == 'y' or command == "\n"
+          continue = false
+        end
+      end while continue #end of fixing new design problems loop
+    elsif command.chomp == 'y' or command == "\n"
+      puts "cost is currently always set to $5. What price do you want to put to your new style?"
+      inventory.add_style(new_style_type, new_style_fabric, new_style_color, gets.chomp)
+    end #end of "is this right" if
   end #end of command options
 end #end of command-asking loop
