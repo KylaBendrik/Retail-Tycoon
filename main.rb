@@ -1,9 +1,11 @@
 require_relative 'lib/inventory'
 
+inventory = Inventory.new
+
 puts ""
 puts "Welcome, entrepreneur! Below is a list of your starting inventory:"
 puts ""
-print_inv
+inventory.print
 
 loop do
   puts ""
@@ -17,11 +19,9 @@ loop do
     puts "'(u)pdate' lets you update inventory prices"
     puts "'(d)etails' allows you to see more details about a specific style"
   elsif command[0] == 'i'
-    print_inv
+    inventory.print
   elsif command[0] == 'u'
-    $inventory.each_with_index do |batch, index|
-      puts "#{batch.style.sales_tag}"
-    end
+    puts inventory.list
 
     begin
       continue = false
@@ -29,7 +29,7 @@ loop do
       puts "Type the style number of the item for which you wish to update the pricing."
       style_num = gets.chomp
 
-      batch = $inventory.find { |batch| batch.style.style_number == style_num }
+      batch = inventory.lookup(style_num)
 
       puts ""
       puts "What price do you want the #{batch.style.to_s} to be?"
@@ -43,10 +43,8 @@ loop do
       if command.chomp.upcase == 'Y' or command == "\n"
         continue = true
       elsif command.chomp[0] == 'l'
-        puts ""
-        $inventory.each_with_index do |batch, index|
-          puts "#{batch.style.sales_tag}"
-        end
+        puts
+        puts inventory.list
         continue = true
       end
     end while continue
@@ -54,8 +52,8 @@ loop do
     puts "Enter the style number of the item you wish to inspect"
     style_num = gets.chomp
 
-    batch = $inventory.find { |batch| batch.style.style_number == style_num }
-
+    batch = inventory.lookup(style_num)
+    
     puts "#{batch.style.inspect}"
   end #end of command options
 end #end of command-asking loop
