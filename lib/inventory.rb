@@ -1,13 +1,15 @@
 require_relative 'batches'
 
-$inventory = []
-
-4.times do |n|
-  $inventory << Batch.new(Style.new())
-end
-
-def print_inv()
-  $inventory.each do |batch|
-    batch.print_batch_info
+class Inventory
+  attr_reader :batches
+  def initialize
+    @batches = []
+    4.times { @batches << Batch.new(Style.new()) }
+  end
+  
+  def print
+    @batches.each do |batch|
+      batch.print_batch_info
+    end
   end
 end
