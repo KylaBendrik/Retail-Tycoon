@@ -28,22 +28,15 @@ loop do
       puts ""
       puts "Type the style number of the item for which you wish to update the pricing."
       style_num = gets.chomp
-      style_id = 0
 
-
-        $inventory.each_with_index do |batch, index|
-          if batch.style.style_number == style_num
-            style_id = index
-            break
-          end
-        end
+      batch = $inventory.find { |batch| batch.style.style_number == style_num }
 
       puts ""
-      puts "What price do you want the #{$inventory[style_id].style.to_s} to be?"
-      $inventory[style_id].style.price = gets.chomp
+      puts "What price do you want the #{batch.style.to_s} to be?"
+      batch.style.price = gets.chomp
 
       puts ""
-      puts "The #{$inventory[style_id].style.to_s} is now priced at #{$inventory[style_id].style.price}."
+      puts "The #{batch.style.to_s} is now priced at #{batch.style.price}."
       puts ""
       puts "Would you like to update another price? (Yn) (type 'list' to print inventory list)"
       command = gets
@@ -60,15 +53,9 @@ loop do
   elsif command[0] == 'd'
     puts "Enter the style number of the item you wish to inspect"
     style_num = gets.chomp
-    style_id = 0
 
-    $inventory.each_with_index do |batch, index|
-      if batch.style.style_number == style_num
-        style_id = index
-        break
-      end
-    end
+    batch = $inventory.find { |batch| batch.style.style_number == style_num }
 
-    puts "#{$inventory[style_id].style.inspect}"
+    puts "#{batch.style.inspect}"
   end #end of command options
 end #end of command-asking loop
