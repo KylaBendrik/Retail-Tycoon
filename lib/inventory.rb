@@ -6,18 +6,22 @@ class Inventory
     @batches = []
     4.times { @batches << Batch.new(Style.new()) }
   end
-  
+
   def list
     @batches.map { |batch| batch.style.sales_tag }.join "\n"
   end
-  
+
   def print
     @batches.each do |batch|
       batch.print_batch_info
     end
   end
-  
+
   def lookup(style_number)
     @batches.find { |batch| batch.style.style_number == style_number }
+  end
+
+  def add_style
+
   end
 end

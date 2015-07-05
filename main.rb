@@ -18,6 +18,7 @@ loop do
     puts "'(l)ist' lists everything in your store inventory"
     puts "'(u)pdate' lets you update inventory prices"
     puts "'(i)nspect' allows you to see more details about a specific style"
+    puts "'(d)esign' allows you to design a new style"
   elsif command[0] == 'l'
     inventory.print
   elsif command[0] == 'u'
@@ -60,5 +61,7 @@ loop do
     batch = inventory.lookup(style_num)
 
     puts "#{batch.style.inspect_style}"
+  elsif command[0] == 'd'
+    puts "Design command unenabled. Please check back later."
   end #end of command options
 end #end of command-asking loop
