@@ -9,11 +9,12 @@ class Batch
   end
 
   def print_batch_info
-    puts @style.sales_tag
-    print "    "
+    output = @style.sales_tag
+    output += "\n    "
     @quantities.each do |size, amount|
-      print "#{size}:#{amount} "
+      output += "#{size}:#{amount} "
     end
-    print "\n"
+    output += "\n"
+    output
   end
 end

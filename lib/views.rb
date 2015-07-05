@@ -1,8 +1,15 @@
-$greeting_text = <<END
+require 'erb'
 
-Welcome, entrepreneur! Below is a list of your starting inventory:
-
-END
+class GreetingView
+  def initialize(inventory)
+    @inventory = inventory
+  end
+  
+  def render
+    b = binding
+    ERB.new(File.read('lib/views/greeting.erb')).result b
+  end
+end
 
 $prompt_text = <<END
 

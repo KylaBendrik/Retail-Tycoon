@@ -11,8 +11,8 @@ class Inventory
     @batches.map { |batch| batch.style.sales_tag }.join "\n"
   end
   
-  def print
-    @batches.each do |batch|
+  def display
+    @batches.map do |batch|
       batch.print_batch_info
     end
   end

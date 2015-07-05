@@ -3,8 +3,7 @@ require_relative 'lib/views'
 
 inventory = Inventory.new
 
-puts $greeting_text
-inventory.print
+puts GreetingView.new(inventory).render
 
 loop do
   puts $prompt_text
@@ -14,7 +13,7 @@ loop do
   if command[0] == 'h'
     puts $help_text
   elsif command[0] == 'l'
-    inventory.print
+    puts inventory.display
   elsif command[0] == 'u'
     puts inventory.list
 
