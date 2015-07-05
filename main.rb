@@ -1,23 +1,18 @@
 require_relative 'lib/inventory'
+require_relative 'lib/views'
 
 inventory = Inventory.new
 
-puts ""
-puts "Welcome, entrepreneur! Below is a list of your starting inventory:"
-puts ""
+puts $greeting_text
 inventory.print
 
 loop do
-  puts ""
-  puts "What do you want to do? (For list of commands, type '(h)elp')"
+  puts $prompt_text
   command = gets.chomp
-  puts ""
+  puts
 
   if command[0] == 'h'
-    puts "'(h)elp' lists avaliable commands"
-    puts "'(i)nventory' lists everything in your store inventory"
-    puts "'(u)pdate' lets you update inventory prices"
-    puts "'(d)etails' allows you to see more details about a specific style"
+    puts $help_text
   elsif command[0] == 'i'
     inventory.print
   elsif command[0] == 'u'
@@ -25,28 +20,26 @@ loop do
 
     begin
       continue = false
-      puts ""
-      puts "Type the style number of the item for which you wish to update the pricing."
+      puts $update_prompt_text
       style_num = gets.chomp
 
       batch = inventory.lookup(style_num)
 
-      puts ""
+      puts
       puts "What price do you want the #{batch.style.to_s} to be?"
       puts "Cost to produce: #{batch.style.cost}"
       batch.style.price = gets.chomp
 
-      puts ""
+      puts
       puts "The #{batch.style.to_s} is now priced at #{batch.style.price}."
-      puts ""
-      puts "Would you like to update another price? (Yn) (type 'list' to print inventory list)"
+      puts $continue_update_prompt_text
       command = gets
       if command.chomp.upcase == 'Y' or command == "\n"
         continue = true
       elsif command.chomp[0] == 'l'
         puts
         puts inventory.list
-        puts "\nWould you like to update another price? (Yn)"
+        puts $continue_update_prompt_text_wout_list
         command = gets
         if command.chomp.upcase == 'Y' or command == "\n"
           continue = true
@@ -54,7 +47,7 @@ loop do
       end
     end while continue
   elsif command[0] == 'd'
-    puts "Enter the style number of the item you wish to inspect"
+    puts $inspect_prompt
     style_num = gets.chomp
 
     batch = inventory.lookup(style_num)
