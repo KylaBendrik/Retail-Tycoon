@@ -33,7 +33,7 @@ class Style
   end
 
   def price
-    "$#{@base_price}"
+    @base_price
   end
 
   def price=(new_price)
@@ -45,7 +45,7 @@ class Style
   end
 
   def sales_tag
-    "#{style_number}: #{@color} #{@type} for #{price}"
+    "#{style_number}: #{@color} #{@type} for $#{price}"
   end
 
   def inspect_style
@@ -54,7 +54,7 @@ class Style
     "Color: #{@color}\n" +
     "Fabric: #{@fabric_type}\n"+
     "\n" +
-    "Price: #{price}   Cost to make: #{cost}"
+    "Price: $#{price}   Cost to make: $#{cost}"
   end
 
   def self.types
