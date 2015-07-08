@@ -16,8 +16,12 @@ class Style
     @fabric_type=fabric_type
     @color=color
     @style_number = "#{@@types.index(type)}#{@@fabric_types.index(fabric_type).to_s.rjust(2,"0")}#{@@colors.index(color).to_s.rjust(2,"0")}"
-    @cost = 5
+    @cost = Style.cost_calc(type, fabric_type)
     @base_price = base_price
+  end
+
+  def self.cost_calc(type, fabric_type)
+    6
   end
 
   def self.create_random()

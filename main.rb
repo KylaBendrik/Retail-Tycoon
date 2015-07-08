@@ -2,7 +2,7 @@ require_relative 'lib/inventory'
 
 inventory = Inventory.new
 
-money = 50_000
+money = 100
 
 def format_money(number)
   "$" + number.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
@@ -109,7 +109,8 @@ loop do
         end
       end while continue #end of fixing new design problems loop
     elsif command.chomp == 'y' or command == "\n"
-      puts "cost is currently always set to $5. What price do you want to put to your new style?"
+      puts "Default items to be made is 8, which will cost: #{format_money(Style.cost_calc(new_style_type, new_style_fabric) * 8)}."
+      puts "What price do you want to put to your new style?"
       inventory.add_style(new_style_type, new_style_fabric, new_style_color, gets.to_i)
       batch = inventory.batches.last
       puts batch.style.cost.inspect
