@@ -2,14 +2,20 @@ require_relative 'lib/inventory'
 
 inventory = Inventory.new
 
+money = 50_000
+
+def format_money(number)
+  "$" + number.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
+end
+
 puts ""
-puts "Welcome, entrepreneur! Below is a list of your starting inventory:"
+puts "Welcome, entrepreneur! You have #{format_money(money)}. Below is a list of your starting inventory:"
 puts ""
 inventory.print
 
 loop do
   puts ""
-  puts "What do you want to do? (For list of commands, type '(h)elp')"
+  puts "What do you want to do? You have #{format_money(money)}. (For list of commands, type '(h)elp')"
   command = gets.chomp
   puts ""
 
@@ -33,7 +39,7 @@ loop do
         style_num = gets.chomp
 
         batch = inventory.lookup(style_num)
-      end while batch.nil? 
+      end while batch.nil?
 
       puts ""
       puts "What price do you want the #{batch.style.to_s} to be?"
