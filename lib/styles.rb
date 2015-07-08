@@ -36,10 +36,6 @@ class Style
     "$#{@base_price}"
   end
 
-  def cost
-    "$#{@cost}"
-  end
-
   def price=(new_price)
     @base_price = new_price
   end

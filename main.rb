@@ -110,7 +110,9 @@ loop do
       end while continue #end of fixing new design problems loop
     elsif command.chomp == 'y' or command == "\n"
       puts "cost is currently always set to $5. What price do you want to put to your new style?"
-      inventory.add_style(new_style_type, new_style_fabric, new_style_color, gets.chomp)
+      inventory.add_style(new_style_type, new_style_fabric, new_style_color, gets.to_i)
+      puts inventory.batches.last.style.cost.inspect
+      money -= inventory.batches.last.style.cost
     end #end of "is this right" if
   end #end of command options
 end #end of command-asking loop
