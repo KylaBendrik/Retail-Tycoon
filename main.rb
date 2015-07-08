@@ -1,8 +1,9 @@
 require_relative 'lib/inventory'
+require_relative 'lib/customers'
 
 inventory = Inventory.new
-
 money = 100
+customers = []
 
 def format_money(number)
   "$" + number.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
@@ -122,8 +123,13 @@ loop do
     puts ""
     hours.times do |time|
       if Random.new.rand(100) < 16
-        Thread.new do
-          puts "Customer comes in"
+      #  if rand...
+      #    customer = customers.sample
+      #  else
+      #    customer = Customer.new()
+      #  end
+        Thread.new(Customer.new) do |customer|
+          puts "Customer comes in of size #{customer.size} Budget #{customer.budget}"
           sleep 5
 
           batch = inventory.batches.sample
