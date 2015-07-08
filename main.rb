@@ -26,11 +26,14 @@ loop do
 
     begin
       continue = false
-      puts ""
-      puts "Type the style number of the item for which you wish to update the pricing."
-      style_num = gets.chomp
 
-      batch = inventory.lookup(style_num)
+      begin
+        puts ""
+        puts "Type the style number of the item for which you wish to update the pricing."
+        style_num = gets.chomp
+
+        batch = inventory.lookup(style_num)
+      end while batch.nil? 
 
       puts ""
       puts "What price do you want the #{batch.style.to_s} to be?"
