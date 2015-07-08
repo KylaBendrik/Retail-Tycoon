@@ -2,14 +2,20 @@ require_relative 'lib/inventory'
 
 inventory = Inventory.new
 
+money = 100
+
+def format_money(number)
+  "$" + number.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
+end
+
 puts ""
-puts "Welcome, entrepreneur! Below is a list of your starting inventory:"
+puts "Welcome, entrepreneur! You have #{format_money(money)}. Below is a list of your starting inventory:"
 puts ""
 inventory.print
 
 loop do
   puts ""
-  puts "What do you want to do? (For list of commands, type '(h)elp')"
+  puts "What do you want to do? You have #{format_money(money)}. (For list of commands, type '(h)elp')"
   command = gets.chomp
   puts ""
 
@@ -19,6 +25,7 @@ loop do
     puts "'(u)pdate' lets you update inventory prices"
     puts "'(i)nspect' allows you to see more details about a specific style"
     puts "'(d)esign' allows you to design a new style"
+    puts "'(o)pen' opens the shop and allows customers in"
   elsif command[0] == 'l'
     inventory.print
   elsif command[0] == 'u'
@@ -26,11 +33,14 @@ loop do
 
     begin
       continue = false
-      puts ""
-      puts "Type the style number of the item for which you wish to update the pricing."
-      style_num = gets.chomp
 
-      batch = inventory.lookup(style_num)
+      begin
+        puts ""
+        puts "Type the style number of the item for which you wish to update the pricing."
+        style_num = gets.chomp
+
+        batch = inventory.lookup(style_num)
+      end while batch.nil?
 
       puts ""
       puts "What price do you want the #{batch.style.to_s} to be?"
@@ -100,8 +110,33 @@ loop do
         end
       end while continue #end of fixing new design problems loop
     elsif command.chomp == 'y' or command == "\n"
-      puts "cost is currently always set to $5. What price do you want to put to your new style?"
-      inventory.add_style(new_style_type, new_style_fabric, new_style_color, gets.chomp)
+      puts "Default items to be made is 8, which will cost: #{format_money(Style.cost_calc(new_style_type, new_style_fabric) * 8)}."
+      puts "What price do you want to put to your new style?"
+      inventory.add_style(new_style_type, new_style_fabric, new_style_color, gets.to_i)
+      batch = inventory.batches.last
+      puts batch.style.cost.inspect
+      money -= batch.style.cost * batch.quantities.values.reduce(:+)
     end #end of "is this right" if
+  elsif command[0] == 'o'
+    puts "\nHow many hours do you want your shop open for?"
+    hours = gets.to_i * 15
+    puts ""
+    hours.times do |time|
+      if Random.new.rand(100) < 16
+        Thread.new do
+          puts "Customer comes in"
+          sleep 5
+
+          batch = inventory.batches.sample
+          batch.quantities["M"] -= 1
+          money += batch.style.price
+          puts "Customer bought #{batch.style.sales_tag}. You have #{format_money(money)}"
+        end
+      end
+
+      sleep 1
+    end
+    puts "Customers could still be in the store. Wait for them to finish"
+    sleep 5
   end #end of command options
 end #end of command-asking loop

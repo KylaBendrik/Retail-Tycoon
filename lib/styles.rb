@@ -16,8 +16,12 @@ class Style
     @fabric_type=fabric_type
     @color=color
     @style_number = "#{@@types.index(type)}#{@@fabric_types.index(fabric_type).to_s.rjust(2,"0")}#{@@colors.index(color).to_s.rjust(2,"0")}"
-    @cost = 5
+    @cost = Style.cost_calc(type, fabric_type)
     @base_price = base_price
+  end
+
+  def self.cost_calc(type, fabric_type)
+    6
   end
 
   def self.create_random()
@@ -33,11 +37,7 @@ class Style
   end
 
   def price
-    "$#{@base_price}"
-  end
-
-  def cost
-    "$#{@cost}"
+    @base_price
   end
 
   def price=(new_price)
@@ -49,7 +49,7 @@ class Style
   end
 
   def sales_tag
-    "#{style_number}: #{@color} #{@type} for #{price}"
+    "#{style_number}: #{@color} #{@type} for $#{price}"
   end
 
   def inspect_style
@@ -58,7 +58,7 @@ class Style
     "Color: #{@color}\n" +
     "Fabric: #{@fabric_type}\n"+
     "\n" +
-    "Price: #{price}   Cost to make: #{cost}"
+    "Price: $#{price}   Cost to make: $#{cost}"
   end
 
   def self.types
