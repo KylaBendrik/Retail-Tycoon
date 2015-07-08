@@ -2,7 +2,7 @@ require_relative 'lib/inventory'
 
 inventory = Inventory.new
 
-money = 50_000
+money = 100
 
 def format_money(number)
   "$" + number.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
