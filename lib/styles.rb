@@ -9,7 +9,7 @@ class Style
      :yellow, :green, :fern, :olive, :pistachio, :jade, :aqua, :mint, :blue, :indigo,
      :violet, :wine, :white, :grey, :black, :brown, :khaki, :tan, :ecru, :cream, :shell,
      :zaney]
-  @@prices = [1, 2, 3, 4, 15]
+  @@prices = [15, 20, 25, 30, 15]
 
   def initialize(type, fabric_type, color, base_price)
     @type=type

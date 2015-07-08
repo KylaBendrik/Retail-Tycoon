@@ -129,13 +129,19 @@ loop do
       #    customer = Customer.new()
       #  end
         Thread.new(Customer.new) do |customer|
-          puts "Customer comes in of size #{customer.size} Budget #{customer.budget}"
+          puts "#{customer.name} comes in of size #{customer.size} Budget #{customer.budget}"
           sleep 5
 
-          batch = inventory.batches.sample
-          batch.quantities["M"] -= 1
-          money += batch.style.price
-          puts "Customer bought #{batch.style.sales_tag}. You have #{format_money(money)}"
+          buyable_articles = inventory.batches.select {|b| (b.style.price < customer.budget) and (b.quantities[customer.size] > 0)}
+          unless buyable_articles.empty?
+            batch = buyable_articles.sample
+            batch.quantities[customer.size] -= 1
+            customer.budget -= batch.style.price
+            money += batch.style.price
+            puts "#{customer.name} bought #{batch.style.sales_tag}. You have #{format_money(money)}"
+          else
+            puts "#{customer.name} left, there was nothing she could buy."
+          end
         end
       end
 
