@@ -112,8 +112,9 @@ loop do
     elsif command.chomp == 'y' or command == "\n"
       puts "cost is currently always set to $5. What price do you want to put to your new style?"
       inventory.add_style(new_style_type, new_style_fabric, new_style_color, gets.to_i)
-      puts inventory.batches.last.style.cost.inspect
-      money -= inventory.batches.last.style.cost
+      batch = inventory.batches.last
+      puts batch.style.cost.inspect
+      money -= batch.style.cost * batch.quantities.values.reduce(:+)
     end #end of "is this right" if
   elsif command[0] == 'o'
     puts "\nHow many hours do you want your shop open for?"
