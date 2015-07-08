@@ -25,6 +25,7 @@ loop do
     puts "'(u)pdate' lets you update inventory prices"
     puts "'(i)nspect' allows you to see more details about a specific style"
     puts "'(d)esign' allows you to design a new style"
+    puts "'(o)pen' opens the shop and allows customers in"
   elsif command[0] == 'l'
     inventory.print
   elsif command[0] == 'u'
@@ -116,5 +117,26 @@ loop do
       puts batch.style.cost.inspect
       money -= batch.style.cost * batch.quantities.values.reduce(:+)
     end #end of "is this right" if
+  elsif command[0] == 'o'
+    puts "\nHow many hours do you want your shop open for?"
+    hours = gets.to_i * 15
+    puts ""
+    hours.times do |time|
+      if Random.new.rand(100) < 16
+        Thread.new do
+          puts "Customer comes in"
+          sleep 5
+
+          batch = inventory.batches.sample
+          batch.quantities["M"] -= 1
+          money += batch.style.price
+          puts "Customer bought #{batch.style.sales_tag}. You have #{format_money(money)}"
+        end
+      end
+
+      sleep 1
+    end
+    puts "Customers could still be in the store. Wait for them to finish"
+    sleep 5
   end #end of command options
 end #end of command-asking loop
