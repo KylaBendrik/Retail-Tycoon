@@ -21,6 +21,8 @@ $help_text = <<END
 '(l)ist' lists everything in your store inventory
 '(u)pdate' lets you update inventory prices
 '(i)nspect' allows you to see more details about a specific style
+'(d)esign' allows you to design a new style
+'(o)pen' opens the shop and allows customers in
 END
 
 $update_prompt_text = <<END

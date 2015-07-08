@@ -1,7 +1,7 @@
 require_relative 'styles'
 
 class Batch
-  attr_reader :style, :size, :quantity
+  attr_reader :style, :size, :quantities
 
   def initialize(new_style)
     @style = new_style
