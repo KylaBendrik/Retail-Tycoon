@@ -42,10 +42,21 @@ loop do
         batch = inventory.lookup(style_num)
       end while batch.nil?
 
-      puts ""
-      puts "What price do you want the #{batch.style.to_s} to be?"
-      puts "Cost to produce: #{batch.style.cost}"
-      batch.style.price = gets.chomp
+      begin
+        continue = false
+        puts ""
+        puts "What price do you want the #{batch.style.to_s} to be?"
+        puts "Cost to produce: #{batch.style.cost}"
+        batch.style.price = gets.chomp
+        if batch.style.price.to_i > 10000000
+          puts "Be serious."
+          continue = true
+        end
+        if batch.style.price.to_i < 0
+          puts "Really? Your going to pay people to take your merchindise?"
+          continue = true
+        end
+      end while continue
 
       puts ""
       puts "The #{batch.style.to_s} is now priced at #{batch.style.price}."
@@ -111,10 +122,23 @@ loop do
       end while continue #end of fixing new design problems loop
     end
     puts "\nDefault items to be made is 8, which will cost: #{format_money(Style.cost_calc(new_style_type, new_style_fabric) * 8)}."
-    puts "What price do you want to put to your new style?"
-    inventory.add_style(new_style_type, new_style_fabric, new_style_color, gets.to_i)
+    begin
+      continue = false
+      puts ""
+      puts "What price do you want to put to your new style?"
+      new_style_price = gets.chomp
+      if new_style_price.to_i > 10000000
+        puts "Be serious."
+        continue = true
+      end
+      if new_style_price.to_i < 0
+        puts "Really? Your going to pay people to take your merchindise?"
+        continue = true
+      end
+    end while continue
+    inventory.add_style(new_style_type, new_style_fabric, new_style_color, new_style_price)
     batch = inventory.batches.last
-    puts batch.style.cost.inspect
+    # puts batch.style.cost.inspect
     money -= batch.style.cost * batch.quantities.values.reduce(:+)
   elsif command[0] == 'o'
     puts "\nHow many hours do you want your shop open for?"
