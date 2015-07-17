@@ -138,7 +138,7 @@ loop do
     end while continue
     inventory.add_style(new_style_type, new_style_fabric, new_style_color, new_style_price)
     batch = inventory.batches.last
-    puts batch.style.cost.inspect
+    # puts batch.style.cost.inspect
     money -= batch.style.cost * batch.quantities.values.reduce(:+)
   elsif command[0] == 'o'
     puts "\nHow many hours do you want your shop open for?"
